@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "{{%products}}".
@@ -25,6 +26,9 @@ use Yii;
  */
 class Product extends \yii\db\ActiveRecord
 {
+    /** @var UploadedFile */
+    public $imageFile;
+
     /**
      * {@inheritdoc}
      */
@@ -59,9 +63,10 @@ class Product extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'description' => 'Description',
-            'image' => 'Image',
+            'image' => 'Product Image',
+            'imageFile' => 'Product Image',
             'price' => 'Price',
-            'status' => 'Status',
+            'status' => 'Published',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
