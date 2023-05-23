@@ -24,7 +24,7 @@ class ProductController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -91,11 +91,12 @@ class ProductController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
+     * @throws NotFoundHttpException|Exception if the model cannot be found
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

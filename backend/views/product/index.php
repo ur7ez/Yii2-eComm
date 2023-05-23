@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'Image',
                 'attribute' => 'image',
-                'content' => function ($model) {
+                'content' => static function ($model) {
                     /** @var Product $model */
                     return Html::img($model->getImageUrl(), ['style' => 'width:50px']);
                 },
