@@ -27,20 +27,42 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            [
+                'attribute' => 'id',
+                'contentOptions' => ['style' => 'width:60px'],
+            ],
+            [
+                'label' => 'Image',
+                'attribute' => 'image',
+                'content' => function ($model) {
+                    /** @var Product $model */
+                    return Html::img($model->getImageUrl(), ['style' => 'width:50px']);
+                },
+            ],
             'name',
-            'description:ntext',
-            'image',
-            'price',
-            //'status',
-            //'created_at',
-            //'updated_at',
+            'price:currency',
+            [
+                'attribute' => 'status',
+                'content' => function ($model) {
+                    /** @var Product $model */
+                    return Html::tag('span', $model->status ? 'Active' : 'Draft',
+                        ['class' => 'badge badge-' . ($model->status ? 'success': 'danger')]);
+                },
+            ],
+            [
+                'attribute' => 'created_at',
+                'format' => ['datetime'],
+                'contentOptions' => ['style' => 'white-space: nowrap'],
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format' => ['datetime'],
+                'contentOptions' => ['style' => 'white-space: nowrap'],
+            ],
             //'created_by',
             //'updated_by',
             [
-                'class' => ActionColumn::className(),
+                'class' => ActionColumn::class,
                 'urlCreator' => function ($action, Product $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
