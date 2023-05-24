@@ -47,13 +47,6 @@ AppAsset::register($this);
                 <span>Products</span></a>
         </li>
 
-        <!-- Nav Item - Product Categories -->
-        <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Product Categories</span></a>
-        </li>
-
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
