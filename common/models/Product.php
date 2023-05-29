@@ -30,6 +30,9 @@ use yii\web\UploadedFile;
  */
 class Product extends \yii\db\ActiveRecord
 {
+    public const STATUS_UNLISTED = 0;
+    public const STATUS_PUBLISHED = 1;
+
     /** @var $imageFile UploadedFile | null */
     public $imageFile;
 
@@ -62,6 +65,7 @@ class Product extends \yii\db\ActiveRecord
             [['status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['image'], 'string', 'max' => 2000],
+            ['status', 'default', 'value' => self::STATUS_UNLISTED],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
         ];
@@ -84,6 +88,14 @@ class Product extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
+        ];
+    }
+
+    public function getStatusLabels(): array
+    {
+        return [
+            self::STATUS_UNLISTED => 'Unlisted',
+            self::STATUS_PUBLISHED => 'Published',
         ];
     }
 
@@ -168,5 +180,13 @@ class Product extends \yii\db\ActiveRecord
             return Yii::$app->params['frontendUrl'] . '/storage/' . $this->image;
         }
         return Yii::$app->params['frontendUrl'] . '/img/no_image_available.svg';
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortDescription(): string
+    {
+        return \yii\helpers\StringHelper::truncateWords(strip_tags($this->description), 30);
     }
 }
