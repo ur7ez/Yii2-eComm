@@ -43,7 +43,7 @@ AppAsset::register($this);
             'encode' => false,
         ],
     ];
-    if (Yii::$app->user->isGuest) {
+    if (isGuest()) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {

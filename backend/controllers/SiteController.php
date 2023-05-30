@@ -72,7 +72,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        if (!isGuest()) {
             return $this->goHome();
         }
 
