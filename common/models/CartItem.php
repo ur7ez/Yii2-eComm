@@ -27,7 +27,7 @@ class CartItem extends \yii\db\ActiveRecord
 
     /**
      * @param int|null $currUserId
-     * @return false|int|mixed|string|null
+     * @return int
      */
     public static function getTotalQuantityForUser(?int $currUserId)
     {
@@ -44,6 +44,43 @@ class CartItem extends \yii\db\ActiveRecord
             )->scalar();
         }
         return $sum;
+    }
+
+    public static function getTotalPriceForUser(?int $currUserId): float
+    {
+        if (isGuest()) {
+            $cartItems = Yii::$app->session->get(self::SESSION_KEY, []);
+        } else {
+            $cartItems = self::getItemsForUser($currUserId);
+        }
+        $sum = 0;
+        foreach ($cartItems as $cartItem) {
+            $sum += $cartItem['quantity'] * $cartItem['price'];
+        }
+        return $sum;
+    }
+
+    /**
+     * @param int|null $currUserId
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getItemsForUser(?int $currUserId)
+    {
+        return self::findBySql(
+            "SELECT 
+                   c.product_id AS id,
+                   p.image,
+                   p.name,
+                   p.price,
+                   c.quantity,
+                   p.price * c.quantity AS total_price
+                FROM cart_items c
+                         LEFT JOIN products p on c.product_id = p.id
+                WHERE c.created_by = :userId",
+            ['userId' => $currUserId]
+        )
+            ->asArray()
+            ->all();
     }
 
     /**

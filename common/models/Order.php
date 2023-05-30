@@ -2,8 +2,6 @@
 
 namespace common\models;
 
-use Yii;
-
 /**
  * This is the model class for table "{{%orders}}".
  *
@@ -18,11 +16,12 @@ use Yii;
  * @property int|null $created_by
  *
  * @property User $createdBy
- * @property OrderAddresses $orderAddresses
- * @property OrderItems[] $orderItems
+ * @property OrderAddress $orderAddresses
+ * @property OrderItem[] $orderItems
  */
 class Order extends \yii\db\ActiveRecord
 {
+    public const STATUS_DRAFT = 0;
     /**
      * {@inheritdoc}
      */
@@ -77,21 +76,21 @@ class Order extends \yii\db\ActiveRecord
     /**
      * Gets query for [[OrderAddresses]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\OrderAddressesQuery
+     * @return \yii\db\ActiveQuery|\common\models\query\OrderAddressQuery
      */
     public function getOrderAddresses()
     {
-        return $this->hasOne(OrderAddresses::class, ['order_id' => 'id']);
+        return $this->hasOne(OrderAddress::class, ['order_id' => 'id']);
     }
 
     /**
      * Gets query for [[OrderItems]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\OrderItemsQuery
+     * @return \yii\db\ActiveQuery|\common\models\query\OrderItemQuery
      */
     public function getOrderItems()
     {
-        return $this->hasMany(OrderItems::class, ['order_id' => 'id']);
+        return $this->hasMany(OrderItem::class, ['order_id' => 'id']);
     }
 
     /**
