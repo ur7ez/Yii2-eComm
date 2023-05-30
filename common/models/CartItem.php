@@ -26,6 +26,27 @@ class CartItem extends \yii\db\ActiveRecord
     }
 
     /**
+     * @param int|null $currUserId
+     * @return false|int|mixed|string|null
+     */
+    public static function getTotalQuantityForUser(?int $currUserId)
+    {
+        if (isGuest()) {
+            $cartItems = Yii::$app->session->get(self::SESSION_KEY, []);
+            $sum = 0;
+            foreach ($cartItems as $cartItem) {
+                $sum += $cartItem['quantity'];
+            }
+        } else {
+            $sum = self::findBySql(
+                "SELECT SUM(quantity) FROM cart_items WHERE created_by = :userId",
+                ['userId' => $currUserId]
+            )->scalar();
+        }
+        return $sum;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function rules()

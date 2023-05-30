@@ -1,6 +1,7 @@
 $(function (){
     const cartQuantity = $('#cart-quantity');
     const addToCart = $('.btn-add-to-cart');
+    const itemQuantities = $('.item-quantity');
 
     addToCart.click(ev => {
         ev.preventDefault();
@@ -17,4 +18,22 @@ $(function (){
         });
     });
 
+    itemQuantities.change(ev => {
+        const $this = $(ev.target);
+        let $tr = $this.closest('tr');
+        const id = $tr.data('id');
+        let quantity = $this.val();
+        if (quantity < 1) {
+            quantity = 1;
+            $this.val(1);
+        }
+        $.ajax({
+            method: 'POST',
+            url: $tr.data('url'),
+            data: {id, quantity},
+            success: function (totalQuantity) {
+                cartQuantity.text(totalQuantity);
+            }
+        });
+    });
 });

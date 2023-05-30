@@ -1,5 +1,9 @@
 <?php
 /** @var array $items */
+
+use yii\helpers\Html;
+use yii\helpers\Url;
+
 ?>
 <div class="card">
     <div class="card-header">
@@ -20,7 +24,7 @@
             </thead>
             <tbody>
             <?php foreach ($items as $item): ?>
-                <tr>
+                <tr data-id="<?= $item['id'] ?>" data-url="<?= Url::to(['/cart/change-quantity']) ?>">
                     <td><?= $item['name'] ?></td>
                     <td>
                         <img src="<?= \common\models\Product::formatImageUrl($item['image']) ?>"
@@ -28,10 +32,12 @@
                              alt="<?= $item['name'] ?>">
                     </td>
                     <td><?= $item['price'] ?></td>
-                    <td><?= $item['quantity'] ?></td>
+                    <td>
+                        <input type="number" min="1" class="form-control w-25 item-quantity" value="<?= $item['quantity'] ?>">
+                    </td>
                     <td><?= $item['total_price'] ?></td>
                     <td>
-                        <?= \yii\helpers\Html::a('Delete', ['/cart/delete', 'id' => $item['id']], [
+                        <?= Html::a('Delete', ['/cart/delete', 'id' => $item['id']], [
                             'class' => 'btn btn-outline-danger btn-sm',
                             'data-method' => 'post',
                             'data-confirm' => 'Are you sure you want to remove this product from cart?',
@@ -42,7 +48,7 @@
             </tbody>
         </table>
         <div class="card-body text-end">
-            <a href="<?= \yii\helpers\Url::to(['/cart/checkout']) ?>" class="btn btn-primary">Checkout</a>
+            <a href="<?= Url::to(['/cart/checkout']) ?>" class="btn btn-primary">Checkout</a>
         </div>
         <?php else: ?>
         <p class="text-muted text-center p-5">There are no items in the cart</p>
