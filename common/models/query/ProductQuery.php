@@ -40,4 +40,13 @@ class ProductQuery extends \yii\db\ActiveQuery
     {
         return $this->andWhere(['status' => Product::STATUS_PUBLISHED]);
     }
+
+    /**
+     * @param $id
+     * @return ProductQuery
+     */
+    public function id($id): ProductQuery
+    {
+        return $this->andWhere(['id' => $id]);
+    }
 }

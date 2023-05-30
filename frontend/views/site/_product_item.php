@@ -17,7 +17,9 @@
     <!-- Product actions-->
     <div class="card-footer">
         <div class="text-end">
-            <a class="btn btn-primary mt-auto" href="#">Add to Cart</a>
+            <a href="<?= \yii\helpers\Url::to(['/cart/add']) ?>" class="btn btn-primary mt-auto btn-add-to-cart">
+                Add to Cart
+            </a>
         </div>
     </div>
 </div>
