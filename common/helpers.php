@@ -9,3 +9,8 @@ function currUserId(): ?int
 {
     return Yii::$app->user->id;
 }
+
+function param(string $key)
+{
+    return Yii::$app->params[$key];
+}

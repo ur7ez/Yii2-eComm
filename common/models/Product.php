@@ -189,9 +189,9 @@ class Product extends \yii\db\ActiveRecord
     public static function formatImageUrl ($imgPath): string
     {
         if ($imgPath) {
-            return Yii::$app->params['frontendUrl'] . '/storage/' . $imgPath;
+            return param('frontendUrl') . '/storage/' . $imgPath;
         }
-        return Yii::$app->params['frontendUrl'] . '/img/no_image_available.svg';
+        return param('frontendUrl') . '/img/no_image_available.svg';
     }
 
     /**

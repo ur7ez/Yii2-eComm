@@ -48,11 +48,7 @@ class CartItem extends \yii\db\ActiveRecord
 
     public static function getTotalPriceForUser(?int $currUserId): float
     {
-        if (isGuest()) {
-            $cartItems = Yii::$app->session->get(self::SESSION_KEY, []);
-        } else {
-            $cartItems = self::getItemsForUser($currUserId);
-        }
+        $cartItems = self::getItemsForUser($currUserId);
         $sum = 0;
         foreach ($cartItems as $cartItem) {
             $sum += $cartItem['quantity'] * $cartItem['price'];
@@ -64,10 +60,13 @@ class CartItem extends \yii\db\ActiveRecord
      * @param int|null $currUserId
      * @return array|\yii\db\ActiveRecord[]
      */
-    public static function getItemsForUser(?int $currUserId)
+    public static function getItemsForUser(?int $currUserId): array
     {
-        return self::findBySql(
-            "SELECT 
+        if (isGuest()) {
+            $cartItems = Yii::$app->session->get(self::SESSION_KEY, []);
+        } else {
+            $cartItems = self::findBySql(
+                'SELECT 
                    c.product_id AS id,
                    p.image,
                    p.name,
@@ -76,11 +75,26 @@ class CartItem extends \yii\db\ActiveRecord
                    p.price * c.quantity AS total_price
                 FROM cart_items c
                          LEFT JOIN products p on c.product_id = p.id
-                WHERE c.created_by = :userId",
-            ['userId' => $currUserId]
-        )
-            ->asArray()
-            ->all();
+                WHERE c.created_by = :userId',
+                ['userId' => $currUserId]
+            )
+                ->asArray()
+                ->all();
+        }
+        return $cartItems;
+    }
+
+    /**
+     * @param int|null $currUserId
+     * @return void
+     */
+    public static function clearCartItems(?int $currUserId): void
+    {
+        if (isGuest()) {
+            Yii::$app->session->remove(self::SESSION_KEY);
+        } else {
+            self::deleteAll(['created_by' => $currUserId]);
+        }
     }
 
     /**
