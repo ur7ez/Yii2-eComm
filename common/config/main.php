@@ -10,6 +10,7 @@ return [
             'class' => \yii\caching\FileCache::class,
         ],
         'formatter' => [
+            'class' => \common\i18n\Formatter::class,
             'dateFormat' => 'dd.MM.yyyy',
             'datetimeFormat' => 'php:d.m.Y H:i',
             'decimalSeparator' => ',',
