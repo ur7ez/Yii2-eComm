@@ -65,7 +65,14 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
             [['password', 'password_repeat'], 'string', 'min' => 8],
-            ['password_repeat', 'compare', 'compareAttribute' => 'password'],
+            [
+                'password_repeat', 'compare', 'compareAttribute' => 'password',
+//                'skipOnEmpty' => false,
+//                'when' => function ($model) {
+//                    return ($model->password !== null && $model->password !== '')
+//                        || ($model->password_repeat !== null && $model->password_repeat !== '');
+//                },
+            ],
         ];
     }
 
@@ -244,5 +251,17 @@ class User extends ActiveRecord implements IdentityInterface
         $address = $this->addresses[0] ?? new UserAddress();
         $address->user_id = $this->id;
         return $address;
+    }
+
+    /**
+     * @return void
+     * @throws Exception
+     */
+    public function afterValidate()
+    {
+        parent::afterValidate();
+        if ($this->password) {
+            $this->setPassword($this->password);
+        }
     }
 }

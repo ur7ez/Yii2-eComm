@@ -6,7 +6,7 @@ use yii\bootstrap5\ActiveForm;
 ?>
 <?php if (isset($success) && $success): ?>
     <div class="alert alert-success">
-        Yor account was successfully updated
+        Your account was successfully updated
     </div>
 <?php endif; ?>
 <?php $form = ActiveForm::begin([
@@ -27,7 +27,7 @@ use yii\bootstrap5\ActiveForm;
     <?= $form->field($user, 'email') ?>
     <div class="row">
         <div class="col">
-            <?= $form->field($user, 'password')->passwordInput() ?>
+            <?= $form->field($user, 'password')->passwordInput(['autocomplete' => 'new-password']) ?>
         </div>
         <div class="col">
             <?= $form->field($user, 'password_repeat')->passwordInput() ?>
