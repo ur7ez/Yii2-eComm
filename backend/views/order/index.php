@@ -24,25 +24,36 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
+        'id' => 'orders-table',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pager' => [
+            'class' => \yii\bootstrap5\LinkPager::class,
+        ],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'total_price',
-            'status',
-            'firstname',
-            'lastname',
+            [
+                'attribute' => 'id',
+                'contentOptions' => ['style' => 'width: 80px;'],
+            ],
+            [
+                'attribute' => 'fullname',
+                'content' => function ($model) {
+                    return $model->firstname . ' ' . $model->lastname;
+                }
+            ],
+            'total_price:currency',
             //'email:email',
             //'transaction_id',
-            //'created_at',
+            //'paypal_order_id',
+            'status:orderStatus',
+            'created_at:datetime',
             //'created_by',
             [
-                'class' => ActionColumn::className(),
+                'class' => ActionColumn::class,
+                'template' => '{view} {delete}',
                 'urlCreator' => function ($action, Order $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>
