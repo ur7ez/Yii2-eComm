@@ -54,11 +54,16 @@ class ProfileController extends Controller
         ]);
     }
 
+    /**
+     * @return string
+     * @throws ForbiddenHttpException
+     */
     public function actionUpdateAccount()
     {
         if (!Yii::$app->request->isAjax) {
             throw new ForbiddenHttpException('You are only allowed to make ajax requests');
         }
+        /** @var User $user */
         $user = Yii::$app->user->identity;
         $success = false;
         if ($user->load(Yii::$app->request->post()) && $user->save()) {

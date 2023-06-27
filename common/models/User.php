@@ -34,7 +34,7 @@ class User extends ActiveRecord implements IdentityInterface
     public const STATUS_ACTIVE = 10;
 
     public $password;
-    public $passwordConfirm;
+    public $password_repeat;
 
     /**
      * {@inheritdoc}
@@ -64,6 +64,8 @@ class User extends ActiveRecord implements IdentityInterface
             [['firstname', 'lastname', 'username', 'email'], 'string', 'max' => 255],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            [['password', 'password_repeat'], 'string', 'min' => 8],
+            ['password_repeat', 'compare', 'compareAttribute' => 'password'],
         ];
     }
 
