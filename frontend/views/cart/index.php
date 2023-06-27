@@ -31,7 +31,7 @@ use yii\helpers\Url;
                              style="width: 50px;"
                              alt="<?= $item['name'] ?>">
                     </td>
-                    <td><?= $item['price'] ?></td>
+                    <td><?= Yii::$app->formatter->asCurrency($item['price']) ?></td>
                     <td>
                         <input type="number" min="1" class="form-control w-25 item-quantity" value="<?= $item['quantity'] ?>">
                     </td>
