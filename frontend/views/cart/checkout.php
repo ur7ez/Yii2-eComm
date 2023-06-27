@@ -1,6 +1,7 @@
 <?php
 /** @var \common\models\Order $order */
 /** @var \common\models\OrderAddress $orderAddress */
+/** @var array $cartItems */
 /** @var int $productQuantity */
 /** @var float $totalPrice */
 
@@ -9,7 +10,6 @@ use yii\bootstrap5\ActiveForm;
 
 <?php $form = ActiveForm::begin([
     'id' => 'checkout-form',
-    //'action' => ['/cart/submit-order'],
 ]); ?>
 <div class="row">
     <div class="col">
@@ -48,9 +48,34 @@ use yii\bootstrap5\ActiveForm;
                 <h5>Order Summary</h5>
             </div>
             <div class="card-body">
+                <table class="table table-sm">
+                    <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($cartItems as $item): ?>
+                        <tr>
+                            <td>
+                                <img src="<?= \common\models\Product::formatImageUrl($item['image']) ?>"
+                                     style="width: 50px;"
+                                     alt="<?= $item['name'] ?>">
+                            </td>
+                            <td><?= $item['name'] ?></td>
+                            <td><?= $item['quantity'] ?></td>
+                            <td><?= Yii::$app->formatter->asCurrency($item['total_price']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
                 <table class="table table-striped-columns table-group-divider">
                     <tr>
-                        <td colspan="2"><?= $productQuantity ?> Products</td>
+                        <td>Total Items</td>
+                        <td class="text-end"><?= $productQuantity ?></td>
                     </tr>
                     <tr>
                         <td>Total Price</td>
