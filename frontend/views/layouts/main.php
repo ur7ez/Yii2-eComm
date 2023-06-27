@@ -87,8 +87,14 @@ AppAsset::register($this);
 
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
-        <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-        <p class="float-end"><?= Yii::powered() ?></p>
+        <div class="row">
+            <div class="col">
+                <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+            </div>
+            <div class="col">
+                <p class="float-end">Created by <a href="https://www.youtube.com/ur7ez" target="_blank" title="open UR7EZ YouTube channel">UR7EZ</a></p>
+            </div>
+        </div>
     </div>
 </footer>
 
