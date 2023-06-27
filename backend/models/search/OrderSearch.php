@@ -11,6 +11,8 @@ use common\models\Order;
  */
 class OrderSearch extends Order
 {
+    public $fullname;
+
     /**
      * {@inheritdoc}
      */
@@ -19,8 +21,17 @@ class OrderSearch extends Order
         return [
             [['id', 'status', 'created_at', 'created_by'], 'integer'],
             [['total_price'], 'number'],
-            [['firstname', 'lastname', 'email', 'transaction_id'], 'safe'],
+            [['firstname', 'lastname', 'fullname', 'email', 'transaction_id'], 'safe'],
         ];
+    }
+
+    public function fields()
+    {
+        return array_merge(parent::fields(), [
+            'fullname' => function () {
+            return $this->firstname . ' ' . $this->lastname;
+            }
+        ]);
     }
 
     /**
@@ -48,6 +59,11 @@ class OrderSearch extends Order
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        $dataProvider->sort->attributes['fullname'] = [
+            'label' => 'Full Name',
+            'asc' => ['firstname' => SORT_ASC, 'lastname' => SORT_ASC],
+            'desc' => ['firstname' => SORT_DESC, 'lastname' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -55,6 +71,12 @@ class OrderSearch extends Order
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
+        }
+        if ($this->fullname) {
+            $query->andWhere(
+                "CONCAT(firstname, ' ', lastname) LIKE :fullname",
+                ['fullname' => "%{$this->fullname}%"]
+            );
         }
 
         // grid filtering conditions
@@ -69,7 +91,8 @@ class OrderSearch extends Order
         $query->andFilterWhere(['like', 'firstname', $this->firstname])
             ->andFilterWhere(['like', 'lastname', $this->lastname])
             ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'transaction_id', $this->transaction_id]);
+            ->andFilterWhere(['like', 'transaction_id', $this->transaction_id])
+            ->andFilterWhere(['like', 'paypal_order_id', $this->paypal_order_id]);
 
         return $dataProvider;
     }
