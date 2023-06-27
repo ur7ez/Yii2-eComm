@@ -14,7 +14,7 @@ return [
             'datetimeFormat' => 'php:d.m.Y H:i',
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',
-            'currencyCode' => 'EUR',
+            'currencyCode' => 'USD',
         ],
     ],
 ];

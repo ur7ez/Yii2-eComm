@@ -12,7 +12,6 @@ $(function (){
             url: $this.attr('href'),
             data: {id},
             success: function () {
-                console.log(arguments);
                 cartQuantity.text(parseInt(cartQuantity.text() || 0) + 1);
             }
         });
@@ -20,7 +19,8 @@ $(function (){
 
     itemQuantities.change(ev => {
         const $this = $(ev.target);
-        let $tr = $this.closest('tr');
+        let $tr = $this.closest('tr'),
+            $td = $this.closest('td');
         const id = $tr.data('id');
         let quantity = $this.val();
         if (quantity < 1) {
@@ -31,8 +31,9 @@ $(function (){
             method: 'POST',
             url: $tr.data('url'),
             data: {id, quantity},
-            success: function (totalQuantity) {
-                cartQuantity.text(totalQuantity);
+            success: function (res) {
+                cartQuantity.text(res.quantity);
+                $td.next().text(res.item_price);
             }
         });
     });

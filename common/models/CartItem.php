@@ -46,6 +46,23 @@ class CartItem extends \yii\db\ActiveRecord
         return $sum;
     }
 
+    /**
+     * @param int|null $productId
+     * @param int|null $currUserId
+     * @return float
+     */
+    public static function getTotalPriceForItemForUser(?int $productId, ?int $currUserId): float
+    {
+        $cartItems = self::getItemsForUser($currUserId);
+        $sum = 0;
+        foreach ($cartItems as $cartItem) {
+            if ($cartItem['id'] == $productId) {
+                $sum += $cartItem['quantity'] * $cartItem['price'];
+            }
+        }
+        return $sum;
+    }
+
     public static function getTotalPriceForUser(?int $currUserId): float
     {
         $cartItems = self::getItemsForUser($currUserId);
