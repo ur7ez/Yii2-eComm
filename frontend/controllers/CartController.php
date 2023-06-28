@@ -242,6 +242,7 @@ class CartController extends Controller
 
         $environment = new SandboxEnvironment(param('paypalClientId'), param('paypalSecret'));
         $client = new PayPalHttpClient($environment);
+        // TODO: save PP response info in logs
         $response = $client->execute(new OrdersGetRequest($paypalOrderId));
 
         if ($response->statusCode === 200) {
