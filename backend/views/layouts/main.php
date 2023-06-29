@@ -35,7 +35,7 @@ AppAsset::register($this);
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="<?= Yii::$app->homeUrl ?>">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -329,6 +329,7 @@ AppAsset::register($this);
 </div>
 
 <?php $this->endBody() ?>
+<?= $this->blocks['dashboardChartScript'] ?? '' ?>
 </body>
 </html>
 <?php $this->endPage();
