@@ -65,6 +65,7 @@ class ProfileController extends Controller
         }
         /** @var User $user */
         $user = Yii::$app->user->identity;
+        $user->scenario = User::SCENARIO_UPDATE;
         $success = false;
         if ($user->load(Yii::$app->request->post()) && $user->save()) {
             $success = true;
