@@ -1,6 +1,8 @@
 <?php
 
-use yii\helpers\Html;
+use common\models\Order;
+use yii\bootstrap5\ActiveForm;
+use yii\bootstrap5\Html;
 
 /** @var yii\web\View $this */
 /** @var common\models\Order $model */
@@ -11,11 +13,13 @@ $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' 
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="order-update">
-
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
+    <?php $form = ActiveForm::begin(); ?>
+    <?= $form->field($model, 'status')->dropDownList(Order::getStatusLabels(), [
+        'class' => 'form-control',
     ]) ?>
-
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
+    <?php ActiveForm::end(); ?>
 </div>

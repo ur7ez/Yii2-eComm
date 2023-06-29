@@ -15,15 +15,8 @@ $this->title = 'Orders';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-index">
-
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Order', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?= GridView::widget([
         'id' => 'orders-table',
         'dataProvider' => $dataProvider,
@@ -60,13 +53,11 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_by',
             [
                 'class' => ActionColumn::class,
-                'template' => '{view} {delete}',
+                'template' => '{view} {update} {delete}',
                 'urlCreator' => function ($action, Order $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                 }
             ],
         ],
-    ]); ?>
-
-
+    ]) ?>
 </div>

@@ -200,4 +200,12 @@ class Order extends \yii\db\ActiveRecord
             self::STATUS_COMPLETED => 'Completed',
         ];
     }
+
+    public static function getFlexibleStatuses (): array
+    {
+        return [
+            self::STATUS_PAID => 'Paid',
+            self::STATUS_COMPLETED => 'Completed',
+        ];
+    }
 }

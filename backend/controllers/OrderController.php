@@ -22,7 +22,7 @@ class OrderController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -61,23 +61,25 @@ class OrderController extends Controller
     }
 
     /**
-     * Creates a new Order model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Updates an existing Order model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param int $id ID
      * @return string|\yii\web\Response
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionCreate()
+    public function actionUpdate($id)
     {
-        $model = new Order();
-
+        $model = $this->findModel($id);
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            $status = $this->request->post('Order')['status'];
+            $model->status = $status;
+            if (!array_key_exists($status, Order::getFlexibleStatuses())) {
+                $model->addError('status', 'Invalid Status');
+            } else if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
-        } else {
-            $model->loadDefaultValues();
         }
-
-        return $this->render('create', [
+        return $this->render('update', [
             'model' => $model,
         ]);
     }
