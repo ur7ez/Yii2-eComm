@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\base\ErrorException;
 use yii\base\Exception;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -23,9 +24,9 @@ use yii\web\UploadedFile;
  * @property int|null $created_by
  * @property int|null $updated_by
  *
- * @property CartItems[] $cartItems
+ * @property CartItem[] $cartItems
  * @property User $createdBy
- * @property OrderItems[] $orderItems
+ * @property OrderItem[] $orderItems
  * @property User $updatedBy
  */
 class Product extends \yii\db\ActiveRecord
@@ -100,13 +101,13 @@ class Product extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[CartItems]].
+     * Gets query for [[CartItem]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\CartItemsQuery
+     * @return \yii\db\ActiveQuery|\common\models\query\CartItemQuery
      */
     public function getCartItems()
     {
-        return $this->hasMany(CartItems::class, ['product_id' => 'id']);
+        return $this->hasMany(CartItem::class, ['product_id' => 'id']);
     }
 
     /**
@@ -120,13 +121,13 @@ class Product extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[OrderItems]].
+     * Gets query for [[OrderItem]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\OrderItemsQuery
+     * @return \yii\db\ActiveQuery|\common\models\query\OrderItemQuery
      */
     public function getOrderItems()
     {
-        return $this->hasMany(OrderItems::class, ['product_id' => 'id']);
+        return $this->hasMany(OrderItem::class, ['product_id' => 'id']);
     }
 
     /**
@@ -200,5 +201,17 @@ class Product extends \yii\db\ActiveRecord
     public function getShortDescription(): string
     {
         return \yii\helpers\StringHelper::truncateWords(strip_tags($this->description), 30);
+    }
+
+    /**
+     * @throws ErrorException
+     */
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        if ($this->image) {
+            $dir = Yii::getAlias('@frontend/web/storage/') . dirname($this->image);
+            FileHelper::removeDirectory($dir);
+        }
     }
 }

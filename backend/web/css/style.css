@@ -1,10 +1,10 @@
-#orders-table td,
-#orders-table th {
+table td,
+table th {
     white-space: nowrap;
 }
 
-#orders-table th a.asc:after,
-#orders-table th a.desc:after {
+table th a.asc:after,
+table th a.desc:after {
     font-family: "Font Awesome 5 Free", serif;
     font-weight: 900;
     -webkit-font-smoothing: antialiased;
@@ -15,10 +15,10 @@
     line-height: 1;
     margin-left: 5px;
 }
-#orders-table th a.asc:after {
+table th a.asc:after {
     content: "\f077";
 }
 
-#orders-table th a.desc:after {
+table th a.desc:after {
     content: "\f078";
 }
