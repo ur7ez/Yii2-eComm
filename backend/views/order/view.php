@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -65,7 +64,7 @@ $orderAddress = $model->orderAddress;
         <?php foreach ($model->orderItems as $item): ?>
             <tr>
                 <td>
-                    <img src="<?= $item->product->getImageUrl() ?>" alt=""
+                    <img src="<?= $item->product ? $item->product->getImageUrl() : \common\models\Product::formatImageUrl('') ?>" alt=""
                          style="width: 50px;">
                 </td>
                 <td><?= $item->product_name ?></td>
