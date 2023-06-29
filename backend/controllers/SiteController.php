@@ -71,7 +71,7 @@ class SiteController extends Controller
         $totalProducts = OrderItem::find()
             ->alias('oi')
             ->innerJoin(Order::tableName() . ' o', 'o.id = oi.order_id')
-            ->andWhere(['o.status' => Order::STATUS_COMPLETED])
+            ->andWhere(['o.status' => [Order::STATUS_PAID, Order::STATUS_COMPLETED]])
             ->sum('quantity');
         $totalUsers = User::find()->andWhere(['status' => User::STATUS_ACTIVE])->count();
 
@@ -80,9 +80,10 @@ class SiteController extends Controller
                         CAST(DATE_FORMAT(FROM_UNIXTIME(o.created_at), '%Y-%m-%d %H:%i:%s') as DATE) AS `date`
                         , SUM(o.total_price) AS `total_price`
                     FROM orders o
-                    WHERE o.status = :status
+                    WHERE o.status IN (:status_paid, :status_completed)
                     GROUP BY CAST(DATE_FORMAT(FROM_UNIXTIME(o.created_at), '%Y-%m-%d %H:%i:%s') as DATE)
-                    ORDER BY o.created_at;", ['status' => Order::STATUS_COMPLETED])
+                    ORDER BY o.created_at;
+            ", ['status_paid' => Order:: STATUS_PAID, 'status_completed' => Order::STATUS_COMPLETED])
             ->asArray()
             ->all();
 
@@ -100,18 +101,18 @@ class SiteController extends Controller
             }
         }
 
+        // Pie Chart data:
         $ctyData = Order::findBySql("
                 SELECT oa.country, SUM(o.total_price) AS `total_price`
                 FROM orders o
                     JOIN order_addresses oa on o.id = oa.order_id
-                WHERE o.status = :status
+                WHERE o.status IN (:status_paid, :status_completed)
                 GROUP BY oa.country
                 ORDER BY oa.country;
-        ", ['status' => Order::STATUS_COMPLETED])
+        ", ['status_paid' => Order:: STATUS_PAID, 'status_completed' => Order::STATUS_COMPLETED])
             ->asArray()
             ->all();
 
-        // Pie Chart data:
         $countries = ArrayHelper::getColumn($ctyData, 'country');
         $countriesData = ArrayHelper::getColumn($ctyData, 'total_price');
         $colorOptions = [

@@ -254,7 +254,7 @@ class CartController extends Controller
                 }
             }
             if ($paidAmount === (float) $order->total_price && $response->result->status === 'COMPLETED') {
-                $order->status = Order::STATUS_COMPLETED;
+                $order->status = Order::STATUS_PAID;
             } else {
                 $order->status = Order::STATUS_FAILED;
             }

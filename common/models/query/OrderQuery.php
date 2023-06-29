@@ -35,10 +35,11 @@ class OrderQuery extends \yii\db\ActiveQuery
     }
 
     /**
+     * returns orders in status paid or completed
      * @return $this
      */
     public function paid(): self
     {
-        return $this->andWhere(['status' => Order::STATUS_COMPLETED]);
+        return $this->andWhere(['status' => [Order::STATUS_PAID, Order::STATUS_COMPLETED]]);
     }
 }

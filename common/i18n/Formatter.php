@@ -2,6 +2,7 @@
 namespace common\i18n;
 use common\models\Order;
 use yii\bootstrap5\Html;
+use yii\db\Exception;
 
 /**
  * @package
@@ -9,17 +10,24 @@ use yii\bootstrap5\Html;
 class Formatter extends \yii\i18n\Formatter
 {
     /**
-     * @param $status
+     * @param int|string $status order status
      * @return string
+     * @throws Exception
      */
     public function asOrderStatus ($status)
     {
-        if ($status == Order::STATUS_COMPLETED) {
-            return Html::tag('span', 'Paid', ['class' => 'badge badge-success']);
+        $orderLabels = Order::getStatusLabels();
+        switch ($status) {
+            case Order::STATUS_COMPLETED:
+                return Html::tag('span', $orderLabels[$status], ['class' => 'badge badge-success']);
+            case Order::STATUS_PAID:
+                return Html::tag('span', $orderLabels[$status], ['class' => 'badge badge-primary']);
+            case Order::STATUS_DRAFT:
+                return Html::tag('span', $orderLabels[$status], ['class' => 'badge badge-secondary']);
+            case Order::STATUS_FAILED:
+                return Html::tag('span', $orderLabels[$status], ['class' => 'badge badge-danger']);
+            default:
+                throw new Exception('Undefined order status: ' . $status);
         }
-        if ($status == Order::STATUS_DRAFT) {
-            return Html::tag('span', 'Unpaid', ['class' => 'badge badge-secondary']);
-        }
-        return Html::tag('span', 'Failed', ['class' => 'badge badge-danger']);
     }
 }

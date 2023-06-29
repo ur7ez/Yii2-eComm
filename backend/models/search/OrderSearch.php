@@ -53,20 +53,17 @@ class OrderSearch extends Order
     public function search($params)
     {
         $query = Order::find();
-
         // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+        $dataProvider->sort->defaultOrder = ['created_at' => SORT_DESC];
         $dataProvider->sort->attributes['fullname'] = [
             'label' => 'Full Name',
             'asc' => ['firstname' => SORT_ASC, 'lastname' => SORT_ASC],
             'desc' => ['firstname' => SORT_DESC, 'lastname' => SORT_DESC],
         ];
-
         $this->load($params);
-
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
