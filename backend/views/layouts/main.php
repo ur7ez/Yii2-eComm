@@ -121,10 +121,15 @@ AppAsset::register($this);
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <footer class="sticky-footer bg-white">
+        <footer class="sticky-footer bg-white text-muted">
             <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2021</span>
+                <div class="row copyright">
+                    <div class="col">
+                        <span class="float-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></span>
+                    </div>
+                    <div class="col">
+                        <span class="float-right">Created by <a href="https://www.youtube.com/ur7ez" target="_blank" title="open UR7EZ YouTube channel">UR7EZ</a></span>
+                    </div>
                 </div>
             </div>
         </footer>

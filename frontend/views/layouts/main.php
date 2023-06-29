@@ -86,13 +86,13 @@ AppAsset::register($this);
 </main>
 
 <footer class="footer mt-auto py-3 text-muted">
-    <div class="container">
+    <div class="container my-auto">
         <div class="row">
             <div class="col">
-                <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+                <span class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></span>
             </div>
             <div class="col">
-                <p class="float-end">Created by <a href="https://www.youtube.com/ur7ez" target="_blank" title="open UR7EZ YouTube channel">UR7EZ</a></p>
+                <span class="float-end">Created by <a href="https://www.youtube.com/ur7ez" target="_blank" title="open UR7EZ YouTube channel">UR7EZ</a></span>
             </div>
         </div>
     </div>
