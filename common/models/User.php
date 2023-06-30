@@ -85,6 +85,8 @@ class User extends ActiveRecord implements IdentityInterface
 //                        || ($model->password_repeat !== null && $model->password_repeat !== '');
 //                },
             ],
+            ['username', 'unique', 'targetClass' => __CLASS__, 'message' => 'This username has already been taken.'],
+            ['email', 'unique', 'targetClass' => __CLASS__, 'message' => 'This email address has already been taken.'],
         ];
     }
 
