@@ -1,14 +1,14 @@
 <?php
+use backend\assets\AppAsset;
+use common\widgets\Alert;
+use yii\helpers\Html;
 
 /** @var yii\web\View $this */
 /** @var string $content */
 
-use backend\assets\AppAsset;
-use yii\helpers\Html;
-
 AppAsset::register($this);
+$this->beginPage();
 ?>
-<?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>" class="h-100">
 <head>
@@ -27,6 +27,7 @@ AppAsset::register($this);
         <div class="col-xl-10 col-lg-12 col-md-9">
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
+                    <?= Alert::widget() ?>
                     <!-- Nested Row within Card Body -->
                     <?= $content ?>
                 </div>

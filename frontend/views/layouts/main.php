@@ -77,9 +77,6 @@ AppAsset::register($this);
 
 <main role="main" class="flex-shrink-0">
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => $this->params['breadcrumbs'] ?? [],
-        ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
