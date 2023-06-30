@@ -3,12 +3,14 @@
 ?>
 <div class="card h-100">
     <!-- Product image-->
-    <img class="card-img-top" src="<?= $model->getImageUrl() ?>" alt="..." />
+    <a href="#" class="img-wrapper">
+        <img class="card-img-top" src="<?= $model->getImageUrl() ?>" alt="..." />
+    </a>
     <!-- Product details-->
     <div class="card-body">
-        <h4 class="card-title">
-            <a href="#"><?= $model->name ?></a>
-        </h4>
+        <h5 class="card-title">
+            <a href="#" class="text-dark text-decoration-none"><?= \yii\helpers\StringHelper::truncateWords($model->name, 20) ?></a>
+        </h5>
         <h5><?= Yii::$app->formatter->asCurrency($model->price) ?></h5>
         <div class="card-text">
             <?= $model->getShortDescription() ?>

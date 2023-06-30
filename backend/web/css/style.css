@@ -1,4 +1,4 @@
-table td,
+table .td-actions,
 table th {
     white-space: nowrap;
 }
@@ -15,6 +15,7 @@ table th a.desc:after {
     line-height: 1;
     margin-left: 5px;
 }
+
 table th a.asc:after {
     content: "\f077";
 }
