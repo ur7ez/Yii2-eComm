@@ -46,6 +46,9 @@ return [
         ],
         'assetManager' => [
             'appendTimestamp' => true,
+            'bundles' => [
+                \yii\bootstrap5\BootstrapAsset::class => false,
+            ],
         ],
     ],
     'params' => $params,

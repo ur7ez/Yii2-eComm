@@ -1,9 +1,8 @@
 <?php
-/** @var array $items */
-
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+/** @var array $items */
 ?>
 <div class="card">
     <div class="card-header">
@@ -33,7 +32,7 @@ use yii\helpers\Url;
                     </td>
                     <td><?= Yii::$app->formatter->asCurrency($item['price']) ?></td>
                     <td>
-                        <input type="number" min="1" class="form-control w-25 item-quantity" value="<?= $item['quantity'] ?>">
+                        <input type="number" min="1" class="form-control w-50 item-quantity" value="<?= $item['quantity'] ?>">
                     </td>
                     <td><?= Yii::$app->formatter->asCurrency($item['total_price']) ?></td>
                     <td>

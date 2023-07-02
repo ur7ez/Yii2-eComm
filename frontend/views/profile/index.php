@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 /** @var \common\models\UserAddress $userAddress */
 ?>
 
-<div class="row">
+<div id="page-profile" class="row">
     <div class="col">
         <div class="card">
             <div class="card-header">

@@ -1,0 +1,28 @@
+{
+  "name": "yii2-eomm",
+  "version": "1.0.0",
+  "description": "test open source e-commerce website based on Yii2 framework. Based on @thecodeholic YT channel",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx webpack",
+    "build": "npx webpack --config webpack.config-prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ur7ez/Yii2-eComm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/ur7ez/Yii2-eComm#readme",
+  "devDependencies": {
+    "css-loader": "^6.8.1",
+    "mini-css-extract-plugin": "^2.7.6",
+    "sass": "^1.63.6",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-remove-empty-scripts": "^1.0.3"
+  }
+}
