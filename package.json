@@ -4,8 +4,8 @@
   "description": "test open source e-commerce website based on Yii2 framework. Based on @thecodeholic YT channel",
   "main": "index.js",
   "scripts": {
-    "start": "npx webpack",
-    "build": "npx webpack --config webpack.config-prod.js"
+    "dev": "npx webpack --config webpack.dev.js",
+    "prod": "npx webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,6 @@
     "style-loader": "^3.3.3",
     "webpack": "^5.88.1",
     "webpack-cli": "^5.1.4",
-    "webpack-remove-empty-scripts": "^1.0.3"
+    "webpack-merge": "^5.9.0"
   }
 }
