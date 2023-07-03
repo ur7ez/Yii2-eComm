@@ -129,7 +129,7 @@ I am working on demo. It will be available soon.
 ## Building assets
 The project uses webpack to build the assets.<br>
 The project styles and bootstrap styles are built together.
-Source files are located in `frontend/scss` and `backend/js`.
+Source files are located in `frontend/scss` and `frontend/js`.
 
 #### Bootstrap customization
 If you want to customize bootstrap variables, open `frontend/scss/bootstrap-variables.scss`
