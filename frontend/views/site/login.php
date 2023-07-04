@@ -6,13 +6,13 @@ use yii\bootstrap5\ActiveForm;
 /** @var yii\bootstrap5\ActiveForm $form */
 /** @var \common\models\LoginForm $model */
 
-$this->title = 'Login';
+$this->title = Yii::t('app', 'Login');
 ?>
 <div class="site-login">
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <h1><?= Html::encode($this->title) ?></h1>
-            <p>Please fill out the following fields to login:</p>
+            <p><?= Yii::t('app', 'Please fill out the following fields to login')?>:</p>
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
                 <?= $form->field($model, 'password')->passwordInput() ?>

@@ -21,5 +21,24 @@ return [
             'thousandSeparator' => ' ',
 //            'currencyCode' => 'USD',
         ],
+        'i18n' => [
+            'translations' => [
+//                'yii' => [
+//                    'class' => \yii\i18n\PhpMessageSource::class,
+//                    'basePath' => '@common/messages/yii',
+//                ],
+                'app*' => [
+                    'class' => \yii\i18n\PhpMessageSource::class,
+                    'basePath' => '@common/messages',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                    ],
+                ],
+                '*' => [
+                    'class' => \yii\i18n\PhpMessageSource::class,
+                    'basePath' => '@common/messages',
+                ],
+            ]
+        ],
     ],
 ];

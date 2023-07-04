@@ -43,14 +43,16 @@ AppAsset::register($this);
         ],
     ];
     if (isGuest()) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
         $menuItems[] = [
             'dropdownOptions' => [
                 'class' => 'dropdown-menu-end',
             ],
-            'label' => Yii::$app->user->identity->getDisplayName(),
+            'label' => Yii::t('app', 'Welcome {name}', [
+                'name' => Yii::$app->user->identity->getDisplayName(),
+            ]),
             'items' => [
                 [
                     'label' => 'Profile',
