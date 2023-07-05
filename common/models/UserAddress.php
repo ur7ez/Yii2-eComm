@@ -47,19 +47,19 @@ class UserAddress extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'address' => 'Address',
-            'city' => 'City',
-            'state' => 'State',
-            'country' => 'Country',
-            'zipcode' => 'Zipcode',
+            'user_id' => Yii::t('app', 'User ID'),
+            'address' => Yii::t('app', 'Address'),
+            'city' => Yii::t('app', 'City'),
+            'state' => Yii::t('app', 'State'),
+            'country' => Yii::t('app', 'Country'),
+            'zipcode' => Yii::t('app', 'ZipCode'),
         ];
     }
 
     /**
      * Gets query for [[User]].
      *
-     * @return \yii\db\ActiveQuery|\common\models\query\UserQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getUser()
     {

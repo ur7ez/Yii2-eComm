@@ -85,8 +85,8 @@ class User extends ActiveRecord implements IdentityInterface
 //                        || ($model->password_repeat !== null && $model->password_repeat !== '');
 //                },
             ],
-            ['username', 'unique', 'targetClass' => __CLASS__, 'message' => 'This username has already been taken.'],
-            ['email', 'unique', 'targetClass' => __CLASS__, 'message' => 'This email address has already been taken.'],
+            ['username', 'unique', 'targetClass' => __CLASS__, 'message' => Yii::t('app', 'This username has already been taken.')],
+            ['email', 'unique', 'targetClass' => __CLASS__, 'message' => Yii::t('app', 'This email address has already been taken.')],
         ];
     }
 

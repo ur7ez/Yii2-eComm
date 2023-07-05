@@ -6,7 +6,7 @@ use yii\bootstrap5\ActiveForm;
 ?>
 <?php if (isset($success) && $success): ?>
     <div class="alert alert-success">
-        Yor address was successfully updated
+        <?= Yii::t('app', 'Your address was successfully updated') ?>
     </div>
 <?php endif; ?>
 
@@ -21,5 +21,5 @@ use yii\bootstrap5\ActiveForm;
     <?= $addressForm->field($userAddress, 'state')->textInput(['autofocus' => true]) ?>
     <?= $addressForm->field($userAddress, 'country')->textInput(['autofocus' => true]) ?>
     <?= $addressForm->field($userAddress, 'zipcode')->textInput(['autofocus' => true]) ?>
-    <button class="btn btn-primary">Update</button>
+    <button class="btn btn-primary"><?= Yii::t('app', 'Update') ?></button>
 <?php ActiveForm::end(); ?>

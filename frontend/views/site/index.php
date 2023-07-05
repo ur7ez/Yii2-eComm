@@ -3,7 +3,7 @@
 /** @var yii\web\View $this */
 /** @var \yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'My Yii Application';
+$this->title = Yii::t('app', 'Yii2 E-commerce');
 ?>
 <div class="site-index">
     <div class="body-content">

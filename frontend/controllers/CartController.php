@@ -49,12 +49,16 @@ class CartController extends Controller
         ]);
     }
 
+    /**
+     * @return array|true[]|void
+     * @throws NotFoundHttpException
+     */
     public function actionAdd()
     {
         $id = Yii::$app->request->post('id');
         $product = Product::find()->id($id)->published()->one();
         if (!$product) {
-            throw new NotFoundHttpException('Product does not exist');
+            throw new NotFoundHttpException(Yii::t('app', 'Product does not exist'));
         }
         if (isGuest()) {
             $cartItems = Yii::$app->session->get(CartItem::SESSION_KEY, []);
@@ -122,12 +126,17 @@ class CartController extends Controller
         return $this->redirect(['index']);
     }
 
+    /**
+     * @return array
+     * @throws NotFoundHttpException
+     * @throws \yii\base\InvalidConfigException
+     */
     public function actionChangeQuantity()
     {
         $id = Yii::$app->request->post('id');
         $product = Product::find()->id($id)->published()->one();
         if (!$product) {
-            throw new NotFoundHttpException('Product does not exist');
+            throw new NotFoundHttpException(Yii::t('app', 'Product does not exist'));
         }
         $quantity = max(1, Yii::$app->request->post('quantity'));
         if (isGuest()) {
@@ -262,19 +271,23 @@ class CartController extends Controller
             $order->transaction_id = $response->result->purchase_units[0]->payments->captures[0]->id;
             if ($order->save()) {
                 if (!$order->sendEmailToVendor()) {
-                    Yii::error('Email to the vendor is not sent');
+                    Yii::error(Yii::t('app', 'Email to the vendor is not sent'));
                 }
                 if (!$order->sendEmailToCustomer()) {
-                    Yii::error('Email to the customer is not sent');
+                    Yii::error(Yii::t('app', 'Email to the customer is not sent'));
                 }
                 return [
                     'success' => true,
                 ];
             }
 
-            Yii::error("Order was not saved. Data: "
-                . VarDumper::dumpAsString($order->toArray()) .
-                '. Errors: ' . VarDumper::dumpAsString($order->errors));
+            Yii::error(sprintf("%s.\n%s: %s\n%s: %s",
+                Yii::t('app', 'Order was not saved'),
+                Yii::t('app', 'Data'),
+                VarDumper::dumpAsString($order->toArray()),
+                Yii::t('app', 'Errors'),
+                VarDumper::dumpAsString($order->errors)
+            ));
         }
         throw new BadRequestHttpException();
         // TODO: validate transaction ID.

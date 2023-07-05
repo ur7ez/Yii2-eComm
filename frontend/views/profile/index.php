@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
     <div class="col">
         <div class="card">
             <div class="card-header">
-                Address information
+                <?= Yii::t('app', 'Address Information') ?>
             </div>
             <div class="card-body">
                 <!-- Address information form -->
@@ -27,7 +27,7 @@ use yii\widgets\Pjax;
     <div class="col">
         <div class="card">
             <div class="card-header">
-                Account information
+                <?= Yii::t('app', 'Account Information') ?>
             </div>
             <div class="card-body">
                 <!-- Account information form -->

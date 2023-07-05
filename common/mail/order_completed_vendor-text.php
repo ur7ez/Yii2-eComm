@@ -3,25 +3,25 @@
 
 $orderAddress = $order->orderAddress;
 ?>
-Order #<?php echo $order->id ?> summary:
+<?= Yii::t('app', 'Order') . ' #' . $order->id . ' ' . Yii::t('app', 'summary') ?>:
 
-Account information
-    Firstname: <?php echo $order->firstname ?>
-    Lastname: <?php echo $order->lastname ?>
-    Email: <?php echo $order->email ?>
+<?= Yii::t('app', 'Account Information') ?>
+    <?= Yii::t('app', 'Firstname') . ': ' . $order->firstname ?>
+    <?= Yii::t('app', 'Lastname') . ': ' . $order->lastname ?>
+    <?= Yii::t('app', 'Email') . ': ' . $order->email ?>
 
-Address information
-    Address: <?php echo $orderAddress->address ?>
-    City: <?php echo $orderAddress->city ?>
-    State: <?php echo $orderAddress->state ?>
-    Country: <?php echo $orderAddress->country ?>
-    ZipCode: <?php echo $orderAddress->zipcode ?>
+<?= Yii::t('app', 'Address Information') ?>
+    <?= Yii::t('app', 'Address') . ': ' . $orderAddress->address ?>
+    <?= Yii::t('app', 'City') . ': ' . $orderAddress->city ?>
+    <?= Yii::t('app', 'State') . ': ' . $orderAddress->state ?>
+    <?= Yii::t('app', 'Country') . ': ' . $orderAddress->country ?>
+    <?= Yii::t('app', 'ZipCode') . ': ' . $orderAddress->zipcode ?>
 
 Products
-    Name       Quantity     Price
+    <?= Yii::t('app', 'Name') ?>       <?= Yii::t('app', 'Quantity') ?>     <?= Yii::t('app', 'Price') ?>
 <?php foreach ($order->orderItems as $item): ?>
-    <?php echo $item->product_name ?>  <?php echo $item->quantity ?>    <?php echo Yii::$app->formatter->asCurrency($item->quantity * $item->unit_price) ?>
+    <?= $item->product_name ?>  <?= $item->quantity ?>    <?= Yii::$app->formatter->asCurrency($item->quantity * $item->unit_price) ?>
 <?php endforeach; ?>
 
-Total Items: <?php echo $order->getItemsQuantity() ?>
-Total Price: <?php echo Yii::$app->formatter->asCurrency($order->total_price) ?>
+Total Items: <?= $order->getItemsQuantity() ?>
+Total Price: <?= Yii::$app->formatter->asCurrency($order->total_price) ?>

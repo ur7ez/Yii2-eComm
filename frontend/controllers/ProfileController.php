@@ -37,10 +37,13 @@ class ProfileController extends Controller
         ]);
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionUpdateAddress()
     {
         if (!Yii::$app->request->isAjax) {
-            throw new ForbiddenHttpException('You are only allowed to make ajax requests');
+            throw new ForbiddenHttpException(Yii::t('app', 'You are only allowed to make ajax requests'));
         }
         $user = Yii::$app->user->identity;
         $userAddress = $user->getAddress();
@@ -61,7 +64,7 @@ class ProfileController extends Controller
     public function actionUpdateAccount()
     {
         if (!Yii::$app->request->isAjax) {
-            throw new ForbiddenHttpException('You are only allowed to make ajax requests');
+            throw new ForbiddenHttpException(Yii::t('app', 'You are only allowed to make ajax requests'));
         }
         /** @var User $user */
         $user = Yii::$app->user->identity;

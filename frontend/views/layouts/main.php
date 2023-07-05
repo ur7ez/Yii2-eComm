@@ -37,7 +37,7 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         [
-            'label' => 'Cart <span id="cart-quantity" class="badge bg-danger">' . $cartItemCount . '</span>',
+            'label' => Yii::t('app', 'Cart') . ' <span id="cart-quantity" class="badge bg-danger">' . $cartItemCount . '</span>',
             'url' => ['/cart/index'],
             'encode' => false,
         ],
@@ -90,7 +90,7 @@ AppAsset::register($this);
                 <span class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></span>
             </div>
             <div class="col">
-                <span class="float-end">Created by <a href="https://www.youtube.com/ur7ez" target="_blank" title="open UR7EZ YouTube channel">UR7EZ</a></span>
+                <span class="float-end"><?= Yii::t('app', 'Created by') ?> <a href="https://www.youtube.com/ur7ez" target="_blank" title="<?= Yii::t('app', 'open UR7EZ YouTube channel') ?>">UR7EZ</a></span>
             </div>
         </div>
     </div>

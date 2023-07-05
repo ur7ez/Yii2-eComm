@@ -79,24 +79,24 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'image' => 'Product Image',
-            'imageFile' => 'Product Image',
-            'price' => 'Price',
-            'status' => 'Published',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
+            'name' => Yii::t('app', 'Name'),
+            'description' => Yii::t('app', 'Description'),
+            'image' => Yii::t('app', 'Product Image'),
+            'imageFile' => Yii::t('app', 'Product Image File'),
+            'price' => Yii::t('app', 'Price'),
+            'status' => Yii::t('app', 'Published'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
+            'created_by' => Yii::t('app', 'Created By'),
+            'updated_by' => Yii::t('app', 'Updated By'),
         ];
     }
 
     public function getStatusLabels(): array
     {
         return [
-            self::STATUS_UNLISTED => 'Unlisted',
-            self::STATUS_PUBLISHED => 'Published',
+            self::STATUS_UNLISTED => Yii::t('app', 'Unlisted'),
+            self::STATUS_PUBLISHED => Yii::t('app', 'Published'),
         ];
     }
 

@@ -20,7 +20,7 @@
     <div class="card-footer">
         <div class="text-end">
             <a href="<?= \yii\helpers\Url::to(['/cart/add']) ?>" class="btn btn-primary mt-auto btn-add-to-cart">
-                Add to Cart
+                <?= Yii::t('app', 'Add to Cart') ?>
             </a>
         </div>
     </div>

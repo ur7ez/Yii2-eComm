@@ -15,7 +15,7 @@ use yii\bootstrap5\ActiveForm;
     <div class="col">
         <div class="card mb-3">
             <div class="card-header">
-                <h5>Account information</h5>
+                <h5><?= Yii::t('app', 'Account Information') ?></h5>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -31,7 +31,7 @@ use yii\bootstrap5\ActiveForm;
         </div>
         <div class="card">
             <div class="card-header">
-                <h5>Order address information</h5>
+                <h5><?= Yii::t('app', 'Order address information') ?></h5>
             </div>
             <div class="card-body">
                 <?= $form->field($orderAddress, 'address')->textInput(['autofocus' => true]) ?>
@@ -45,7 +45,7 @@ use yii\bootstrap5\ActiveForm;
     <div class="col">
         <div class="card">
             <div class="card-header">
-                <h5>Order Summary</h5>
+                <h5><?= Yii::t('app', 'Order Summary') ?></h5>
             </div>
             <div class="card-body">
                 <table class="table table-sm">
@@ -83,7 +83,7 @@ use yii\bootstrap5\ActiveForm;
                     </tr>
                 </table>
                 <p class="mt-3 text-end">
-                    <button class="btn btn-secondary">Checkout</button>
+                    <button class="btn btn-secondary"><?= Yii::t('app', 'Checkout') ?></button>
                 </p>
             </div>
         </div>

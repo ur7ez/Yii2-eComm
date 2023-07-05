@@ -11,45 +11,45 @@ $orderAddress = $order->orderAddress;
         flex: 1;
     }
 </style>
-<h3>Order #<?= $order->id ?> summary:</h3>
+<h3><?= Yii::t('app', 'Order') ?> #<?= $order->id ?> <?= Yii::t('app', 'summary') ?>:</h3>
 <br>
 <div class="row">
     <div class="col">
-        <h5>Account Information</h5>
+        <h5><?= Yii::t('app', 'Account Information') ?></h5>
         <table class="table">
             <tr>
-                <th>Firstname</th>
+                <th><?= Yii::t('app', 'Firstname') ?></th>
                 <td><?= $order->firstname ?></td>
             </tr>
             <tr>
-                <th>Lastname</th>
+                <th><?= Yii::t('app', 'Lastname') ?></th>
                 <td><?= $order->lastname ?></td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th><?= Yii::t('app', 'Email') ?></th>
                 <td><?= $order->email ?></td>
             </tr>
         </table>
-        <h5>Address Information</h5>
+        <h5><?= Yii::t('app', 'Address Information') ?></h5>
         <table class="table">
             <tr>
-                <th>Address</th>
+                <th><?= Yii::t('app', 'Address') ?></th>
                 <td><?= $orderAddress->address ?></td>
             </tr>
             <tr>
-                <th>City</th>
+                <th><?= Yii::t('app', 'City') ?></th>
                 <td><?= $orderAddress->city ?></td>
             </tr>
             <tr>
-                <th>State</th>
+                <th><?= Yii::t('app', 'State') ?></th>
                 <td><?= $orderAddress->state ?></td>
             </tr>
             <tr>
-                <th>Country</th>
+                <th><?= Yii::t('app', 'Country') ?></th>
                 <td><?= $orderAddress->country ?></td>
             </tr>
             <tr>
-                <th>ZipCode</th>
+                <th><?= Yii::t('app', 'ZipCode') ?></th>
                 <td><?= $orderAddress->zipcode ?></td>
             </tr>
         </table>
@@ -59,10 +59,10 @@ $orderAddress = $order->orderAddress;
         <table class="table table-sm">
             <thead>
             <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
+                <th><?= Yii::t('app', 'Image') ?></th>
+                <th><?= Yii::t('app', 'Name') ?></th>
+                <th><?= Yii::t('app', 'Quantity') ?></th>
+                <th><?= Yii::t('app', 'Price') ?></th>
             </tr>
             </thead>
             <tbody>
@@ -82,7 +82,7 @@ $orderAddress = $order->orderAddress;
         <hr>
         <table class="table">
             <tr>
-                <th>Total Items</th>
+                <th><?= Yii::t('app', 'Total Items') ?></th>
                 <td><?= $order->getItemsQuantity() ?></td>
             </tr>
             <tr>

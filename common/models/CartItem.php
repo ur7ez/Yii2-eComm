@@ -134,9 +134,9 @@ class CartItem extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => 'Product ID',
-            'quantity' => 'Quantity',
-            'created_by' => 'Created By',
+            'product_id' => Yii::t('app', 'Product ID'),
+            'quantity' => Yii::t('app', 'Quantity'),
+            'created_by' => Yii::t('app', 'Created By'),
         ];
     }
 

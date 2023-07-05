@@ -6,19 +6,19 @@ use yii\helpers\Url;
 ?>
 <div class="card">
     <div class="card-header">
-        <h3>Your cart items</h3>
+        <h3><?= Yii::t('app', 'Your cart items') ?></h3>
     </div>
     <div class="card-body p-0">
         <?php if (!empty($items)): ?>
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>Product</th>
-                <th>Image</th>
-                <th>Unit Price</th>
-                <th>Quantity</th>
-                <th>Total Price</th>
-                <th>Action</th>
+                <th><?= Yii::t('app', 'Product') ?></th>
+                <th><?= Yii::t('app', 'Image') ?></th>
+                <th><?= Yii::t('app', 'Unit Price') ?></th>
+                <th><?= Yii::t('app', 'Quantity') ?></th>
+                <th><?= Yii::t('app', 'Total Price') ?></th>
+                <th><?= Yii::t('app', 'Action') ?></th>
             </tr>
             </thead>
             <tbody>
@@ -39,7 +39,7 @@ use yii\helpers\Url;
                         <?= Html::a('Delete', ['/cart/delete', 'id' => $item['id']], [
                             'class' => 'btn btn-outline-danger btn-sm',
                             'data-method' => 'post',
-                            'data-confirm' => 'Are you sure you want to remove this product from cart?',
+                            'data-confirm' => Yii::t('app', 'Are you sure you want to remove this product from cart?'),
                         ]) ?>
                     </td>
                 </tr>
@@ -47,10 +47,10 @@ use yii\helpers\Url;
             </tbody>
         </table>
         <div class="card-body text-end">
-            <a href="<?= Url::to(['/cart/checkout']) ?>" class="btn btn-primary">Checkout</a>
+            <a href="<?= Url::to(['/cart/checkout']) ?>" class="btn btn-primary"><?= Yii::t('app', 'Checkout') ?></a>
         </div>
         <?php else: ?>
-        <p class="text-muted text-center p-5">There are no items in the cart</p>
+        <p class="text-muted text-center p-5"><?= Yii::t('app', 'There are no items in the cart') ?></p>
         <?php endif; ?>
     </div>
 </div>

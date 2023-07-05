@@ -12,54 +12,54 @@ $orderAddress = $order->orderAddress;
 <br>
 <div class="row">
     <div class="col">
-        <h5>Account Information</h5>
+        <h5><?= Yii::t('app', 'Account Information') ?></h5>
         <table class="table">
             <tr>
-                <th>Firstname</th>
+                <th><?= Yii::t('app', 'Firstname') ?></th>
                 <td><?= $order->firstname ?></td>
             </tr>
             <tr>
-                <th>Lastname</th>
+                <th><?= Yii::t('app', 'Lastname') ?></th>
                 <td><?= $order->lastname ?></td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th><?= Yii::t('app', 'Email') ?></th>
                 <td><?= $order->email ?></td>
             </tr>
         </table>
-        <h5>Address Information</h5>
+        <h5><?= Yii::t('app', 'Address Information') ?></h5>
         <table class="table">
             <tr>
-                <th>Address</th>
+                <th><?= Yii::t('app', 'Address') ?></th>
                 <td><?= $orderAddress->address ?></td>
             </tr>
             <tr>
-                <th>City</th>
+                <th><?= Yii::t('app', 'City') ?></th>
                 <td><?= $orderAddress->city ?></td>
             </tr>
             <tr>
-                <th>State</th>
+                <th><?= Yii::t('app', 'State') ?></th>
                 <td><?= $orderAddress->state ?></td>
             </tr>
             <tr>
-                <th>Country</th>
+                <th><?= Yii::t('app', 'Country') ?></th>
                 <td><?= $orderAddress->country ?></td>
             </tr>
             <tr>
-                <th>ZipCode</th>
+                <th><?= Yii::t('app', 'ZipCode') ?></th>
                 <td><?= $orderAddress->zipcode ?></td>
             </tr>
         </table>
     </div>
     <div class="col">
-        <h5>Products</h5>
+        <h5><?= Yii::t('app', 'Products') ?></h5>
         <table class="table table-sm">
             <thead>
             <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
+                <th><?= Yii::t('app', 'Image') ?></th>
+                <th><?= Yii::t('app', 'Name') ?></th>
+                <th><?= Yii::t('app', 'Quantity') ?></th>
+                <th><?= Yii::t('app', 'Price') ?></th>
             </tr>
             </thead>
             <tbody>
@@ -79,11 +79,11 @@ $orderAddress = $order->orderAddress;
         <hr>
         <table class="table">
             <tr>
-                <th>Total Items</th>
+                <th><?= Yii::t('app', 'Total Items') ?></th>
                 <td><?= $order->getItemsQuantity() ?></td>
             </tr>
             <tr>
-                <th>Total Price</th>
+                <th><?= Yii::t('app', 'Total Price') ?></th>
                 <td><?= \Yii::$app->formatter->asCurrency($order->total_price) ?></td>
             </tr>
         </table>
@@ -98,33 +98,13 @@ $orderAddress = $order->orderAddress;
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            currency_code: 'USD',
                             value: <?= $order->total_price ?>,
                         }
                     }]
                 });
-                // return fetch("/my-server/create-paypal-order", {
-                //     method: "POST",
-                //     headers: {
-                //         "Content-Type": "application/json",
-                //     },
-                //     // use the "body" param to optionally pass additional order information
-                //     // like product skus and quantities
-                //     body: JSON.stringify({
-                //         cart: [
-                //             {
-                //                 sku: "YOUR_PRODUCT_STOCK_KEEPING_UNIT",
-                //                 quantity: "YOUR_PRODUCT_QUANTITY",
-                //             },
-                //         ],
-                //     }),
-                // })
-                //     .then((response) => response.json())
-                //     .then((order) => order.id);
             },
             //  Finalize the transaction on the server after payer approval
             onApprove(data, actions) {
-                console.log(data, actions);
                 // captures the funds from the transaction.
                 return actions.order.capture().then((details) => {
                     const $form = $('#checkout-form');
@@ -143,32 +123,11 @@ $orderAddress = $order->orderAddress;
                         url: '<?= Url::to(['/cart/submit-payment', 'orderId' => $order->id])?>',
                         data: paypalData,
                         success: (res) => {
-                            alert('Thanks for your business');
+                            alert("<?= Yii::t('app', 'Thanks for your business') ?>");
                             window.location.href = '';
                         }
                     });
                 });
-                /*return fetch("/my-server/capture-paypal-order", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        orderID: data.orderID
-                    })
-                })
-                    .then((response) => response.json())
-                    .then((orderData) => {
-                        // Successful capture! For dev/demo purposes:
-                        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                        const transaction = orderData.purchase_units[0].payments.captures[0];
-                        alert(`Transaction ${transaction.status}: ${transaction.id}\n
-                    \nSee console for all available details`);
-                        // When ready to go live, remove the alert and show a success message within this page. For example:
-                        // const element = document.getElementById('paypal-button-container');
-                        // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                        // Or go to another URL:  window.location.href = 'thank_you.html';
-                    });*/
             }
         }
     ).render('#paypal-button-container');

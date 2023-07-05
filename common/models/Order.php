@@ -61,15 +61,15 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'total_price' => 'Total Price',
-            'status' => 'Status',
-            'firstname' => 'Firstname',
-            'lastname' => 'Lastname',
-            'email' => 'Email',
-            'transaction_id' => 'Transaction ID',
-            'paypal_order_id' => 'PayPal Order ID',
-            'created_at' => 'Created At',
-            'created_by' => 'Created By',
+            'total_price' => Yii::t('app', 'Total Price'),
+            'status' => Yii::t('app', 'Status'),
+            'firstname' => Yii::t('app', 'Firstname'),
+            'lastname' => Yii::t('app', 'Lastname'),
+            'email' => Yii::t('app', 'Email'),
+            'transaction_id' => Yii::t('app', 'Transaction ID'),
+            'paypal_order_id' => Yii::t('app', 'PayPal Order ID'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'created_by' => Yii::t('app', 'Created By'),
         ];
     }
 
@@ -127,7 +127,7 @@ class Order extends \yii\db\ActiveRecord
             $orderItem->order_id = $this->id;
             $orderItem->quantity = $cartItem['quantity'];
             if (!$orderItem->save()) {
-                throw new Exception('Order item was not saved: ' . implode('<br>', $orderItem->getFirstErrors()));
+                throw new Exception(Yii::t('app', 'Order item was not saved') . ': ' . implode('<br>', $orderItem->getFirstErrors()));
             }
         }
         return true;
@@ -145,7 +145,7 @@ class Order extends \yii\db\ActiveRecord
         if ($orderAddress->load($postData) && $orderAddress->save()) {
             return true;
         }
-        throw new Exception('Could not save order address: ' . implode('<br>', $orderAddress->getFirstErrors()));
+        throw new Exception(Yii::t('app', 'Could not save order address') . ': ' . implode('<br>', $orderAddress->getFirstErrors()));
     }
 
     public function getItemsQuantity()
@@ -168,9 +168,9 @@ class Order extends \yii\db\ActiveRecord
                 ['html' => 'order_completed_vendor-html', 'text' => 'order_completed_vendor-text'],
                 ['order' => $this]
             )
-            ->setFrom([param('supportEmail') => Yii::$app->name . ' robot'])
+            ->setFrom([param('supportEmail') => Yii::$app->name . ' ' . Yii::t('app', 'robot')])
             ->setTo(param('vendorEmail'))
-            ->setSubject('New order has been made at ' . Yii::$app->name)
+            ->setSubject(Yii::t('app', 'New order has been made at') . ' ' . Yii::$app->name)
             ->send();
     }
 
@@ -187,25 +187,25 @@ class Order extends \yii\db\ActiveRecord
             )
             ->setFrom([param('supportEmail') => Yii::$app->name . ' robot'])
             ->setTo($this->email)
-            ->setSubject('Your order is confirmed at ' . Yii::$app->name)
+            ->setSubject(Yii::t('app', 'Your order is confirmed at') . ' ' . Yii::$app->name)
             ->send();
     }
 
     public static function getStatusLabels (): array
     {
         return [
-            self::STATUS_DRAFT => 'Draft',
-            self::STATUS_PAID => 'Paid',
-            self::STATUS_FAILED => 'Failed',
-            self::STATUS_COMPLETED => 'Completed',
+            self::STATUS_DRAFT => Yii::t('app', 'Draft'),
+            self::STATUS_PAID => Yii::t('app', 'Paid'),
+            self::STATUS_FAILED => Yii::t('app', 'Failed'),
+            self::STATUS_COMPLETED => Yii::t('app', 'Completed'),
         ];
     }
 
     public static function getFlexibleStatuses (): array
     {
         return [
-            self::STATUS_PAID => 'Paid',
-            self::STATUS_COMPLETED => 'Completed',
+            self::STATUS_PAID => Yii::t('app', 'Paid'),
+            self::STATUS_COMPLETED => Yii::t('app', 'Completed'),
         ];
     }
 }

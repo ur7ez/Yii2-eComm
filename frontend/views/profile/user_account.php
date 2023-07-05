@@ -6,7 +6,7 @@ use yii\bootstrap5\ActiveForm;
 ?>
 <?php if (isset($success) && $success): ?>
     <div class="alert alert-success">
-        Your account was successfully updated
+        <?= Yii::t('app', 'Your account was successfully updated') ?>
     </div>
 <?php endif; ?>
 <?php $form = ActiveForm::begin([
@@ -33,5 +33,5 @@ use yii\bootstrap5\ActiveForm;
             <?= $form->field($user, 'password_repeat')->passwordInput() ?>
         </div>
     </div>
-    <button class="btn btn-primary">Update</button>
+    <button class="btn btn-primary"><?= Yii::t('app', 'Update') ?></button>
 <?php ActiveForm::end(); ?>
